@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alba & María | Nuestro Primer Año</title>
+
+    <meta name="theme-color" content="#F7F2EB">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Fondo -->
+
+    <div class="background"></div>
+
+    <!-- Botón Música -->
+
+    <button id="musicButton">
+
+        🔊
+
+    </button>
+
+    <!-- Audio -->
+
+    <audio id="player" loop preload="auto">
+
+        <source src="audio/cancion.mp3" type="audio/mpeg">
+
+    </audio>
+
+    <!-- ========================= -->
+    <!-- PORTADA -->
+    <!-- ========================= -->
+
+    <section id="cover" class="screen active">
+
+        <div class="cover-content">
+
+            <p class="date">
+
+                12 · 07 · 2025
+
+            </p>
+
+            <h1>
+
+                Alba & María
+
+            </h1>
+
+            <h2>
+
+                Nuestro Primer Año
+
+            </h2>
+
+            <button id="openBook">
+
+                Comenzar
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- DEDICATORIA -->
+    <!-- ========================= -->
+
+    <section id="intro" class="screen">
+
+        <div class="paper">
+
+            <h2>
+
+                Para María 🤍
+
+            </h2>
+
+            <p>
+
+                Si estás leyendo esto...
+
+                significa que ya ha pasado un año desde que comenzó nuestra historia.
+
+            </p>
+
+            <p>
+
+                Este pequeño álbum guarda algunos de nuestros recuerdos favoritos.
+
+            </p>
+
+            <p>
+
+                Espero que, mientras pasas cada fotografía,
+
+                vuelvas a sentir todo lo que hemos vivido juntas.
+
+            </p>
+
+            <button id="startAlbum">
+
+                Empezar el álbum
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- CONTADOR -->
+    <!-- ========================= -->
+
+    <section id="counterScreen" class="screen">
+
+        <div class="paper">
+
+            <h2>
+
+                Llevamos juntas...
+
+            </h2>
+
+            <div id="loveCounter">
+
+                <div>
+
+                    <span id="days">0</span>
+
+                    <small>Días</small>
+
+                </div>
+
+                <div>
+
+                    <span id="hours">0</span>
+
+                    <small>Horas</small>
+
+                </div>
+
+                <div>
+
+                    <span id="minutes">0</span>
+
+                    <small>Minutos</small>
+
+                </div>
+
+            </div>
+
+            <button id="continueAlbum">
+
+                Ver nuestros recuerdos
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- ÁLBUM -->
+    <!-- ========================= -->
+
+    <section id="album" class="screen">
+
+        <button id="prev" class="nav">
+
+            ❮
+
+        </button>
+
+        <div class="photo-page">
+
+            <img id="photo" src="" alt="Nuestro recuerdo">
+
+            <p id="caption"></p>
+
+        <div id="progressContainer">
+
+            <div id="progressBar">
+
+                <div id="progressFill"></div>
+
+            </div>
+
+            <div id="progressText">
+
+                <span id="currentPhoto">1</span>
+
+                    /
+
+                <span id="totalPhotos">50</span>
+
+             </div>
+
+        </div>
+
+        </div>
+
+        <button id="next" class="nav">
+
+            ❯
+
+        </button>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- CARTA -->
+    <!-- ========================= -->
+
+    <section id="letter" class="screen">
+
+        <div id="envelope">
+
+            <div class="envelope-front">
+
+                <h2>💌</h2>
+                <p>Púlsame</p>
+
+            </div>
+
+        </div>
+
+        <div id="letterPaper" class="hidden">
+
+            <h2>Para María 🤍</h2>
+
+            <div id="letterText">
+
+             <p></p>
+
+            </div>
+
+            <h3>
+
+                Con todo mi amor,
+
+                <br>
+
+                Alba
+
+            </h3>
+
+            <button id="finish">
+
+                Final
+
+            </button>
+
+        </div>
+
+    </section>
+    <!-- ========================= -->
+    <!-- FINAL -->
+    <!-- ========================= -->
+
+    <section id="ending" class="screen">
+
+        <div class="ending-content">
+
+            <h2>
+
+                Y este libro...
+
+            </h2>
+
+            <h1>
+
+                todavía tiene muchísimas páginas por escribir.
+
+            </h1>
+
+            <p>
+
+                Feliz primer aniversario.
+
+            </p>
+
+            <h3>
+
+                Alba ❤️ María
+
+            </h3>
+
+        </div>
+
+    </section>
+
+    <script src="frases.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

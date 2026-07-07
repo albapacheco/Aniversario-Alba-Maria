@@ -1,0 +1,1275 @@
+/* =====================================================
+   Alba & María - Style v4.1
+   PARTE 1/4
+   ===================================================== */
+
+:root{
+
+    --bg:#F7F2EB;
+    --paper:#FFFCF8;
+    --paper2:#FDF8F2;
+
+    --text:#4D433D;
+    --subtitle:#7B6E66;
+
+    --gold:#B89B77;
+
+    --shadow:0 15px 40px rgba(0,0,0,.10);
+
+    --radius:22px;
+
+    --transition:.35s ease;
+
+}
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:"Poppins",sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    overflow:hidden;
+
+}
+
+/* Fondo */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at top,
+    #fffefc 0%,
+    #f8f4ef 40%,
+    #efe6da 100%);
+
+    z-index:-10;
+
+}
+
+/* Pantallas */
+
+.screen{
+
+    display:none;
+
+    min-height:100vh;
+
+    width:100%;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:28px;
+
+}
+
+.screen.active{
+
+    display:flex;
+
+    animation:fade .5s;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:none;
+
+    }
+
+}
+
+/* Contenedores */
+
+.cover-content,
+.paper,
+.photo-page,
+.ending-content{
+
+    width:min(100%,900px);
+
+}
+
+/* Portada */
+
+.cover-content{
+
+    text-align:center;
+
+}
+
+.date{
+
+    color:var(--subtitle);
+
+    letter-spacing:5px;
+
+    margin-bottom:30px;
+
+}
+
+h1,h2,h3{
+
+    font-family:"Cormorant Garamond",serif;
+
+}
+
+.cover-content h1{
+
+    font-size:clamp(3.4rem,10vw,5rem);
+
+}
+
+.cover-content h2{
+
+    margin-top:10px;
+
+    font-size:clamp(1.6rem,6vw,2.4rem);
+
+    font-weight:400;
+
+}
+
+/* Botones */
+
+button{
+
+    margin-top:35px;
+
+    border:none;
+
+    background:var(--gold);
+
+    color:white;
+
+    padding:15px 34px;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    font-size:1rem;
+
+    transition:var(--transition);
+
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+/* Botón música */
+
+#musicButton{
+
+    position:fixed;
+
+    top:18px;
+
+    right:18px;
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:50%;
+
+    padding:0;
+
+    margin:0;
+
+    z-index:999;
+
+    font-size:1.2rem;
+
+}
+/* =====================================================
+   STYLE V4.1
+   PARTE 2/4
+===================================================== */
+
+/* ===========================
+   Tarjetas de papel
+=========================== */
+
+.paper{
+
+    background:var(--paper);
+
+    border-radius:var(--radius);
+
+    padding:40px 30px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+    border:1px solid rgba(184,155,119,.15);
+
+}
+
+.paper h2{
+
+    font-size:2.6rem;
+
+    margin-bottom:25px;
+
+}
+
+.paper p{
+
+    font-size:1rem;
+
+    line-height:1.9;
+
+    margin-bottom:18px;
+
+    color:var(--text);
+
+}
+
+/* ===========================
+   Contador
+=========================== */
+
+#loveCounter{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin:40px 0;
+
+    flex-wrap:wrap;
+
+}
+
+#loveCounter div{
+
+    background:var(--paper2);
+
+    width:100px;
+
+    height:100px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+}
+
+#loveCounter span{
+
+    font-size:2rem;
+
+    font-weight:bold;
+
+    color:var(--gold);
+
+}
+
+#loveCounter small{
+
+    margin-top:8px;
+
+    color:var(--subtitle);
+
+    font-size:.8rem;
+
+}
+
+/* ===========================
+   Álbum
+=========================== */
+
+#album{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:20px;
+
+}
+
+.photo-page{
+
+    background:var(--paper);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    padding:20px;
+
+    width:min(100%,900px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+/* ===========================
+   Imagen
+=========================== */
+
+#photo{
+
+    width:100%;
+
+    max-height:70vh;
+
+    object-fit:contain;
+
+    border-radius:14px;
+
+    background:#ececec;
+
+    transition:opacity .4s ease;
+
+}
+
+#caption{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    font-style:italic;
+
+    color:var(--subtitle);
+
+    min-height:60px;
+
+    padding:0 10px;
+
+    line-height:1.8;
+
+}
+
+#progress{
+
+    margin-top:18px;
+
+    color:var(--gold);
+
+    font-weight:600;
+
+    letter-spacing:2px;
+
+}
+
+/* ===========================
+   Flechas
+=========================== */
+
+.nav{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    padding:0;
+
+    margin:0;
+
+    font-size:1.5rem;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+/* Animación al cambiar foto */
+
+.fade-photo{
+
+    animation:photoFade .35s;
+
+}
+
+@keyframes photoFade{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.98);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* =====================================================
+   STYLE V4.1
+   PARTE 3/4
+===================================================== */
+
+/* ===========================
+   Carta
+=========================== */
+
+.letter{
+
+    text-align:left;
+
+    max-width:800px;
+
+    position:relative;
+
+}
+
+.letter::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:18px;
+    left:18px;
+    right:18px;
+    bottom:18px;
+
+    border:1px solid rgba(184,155,119,.20);
+
+    border-radius:16px;
+
+    pointer-events:none;
+
+}
+
+.letter h2{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+    font-size:2.8rem;
+
+}
+
+.letter p{
+
+    margin-bottom:22px;
+
+    line-height:2;
+
+    font-size:1.05rem;
+
+    text-align:justify;
+
+}
+
+.letter h3{
+
+    margin-top:40px;
+
+    text-align:right;
+
+    font-size:2rem;
+
+    color:var(--gold);
+
+}
+
+/* ===========================
+   Pantalla Final
+=========================== */
+
+.ending-content{
+
+    text-align:center;
+
+    animation:fade 1.5s ease;
+
+}
+
+.ending-content h2{
+
+    font-size:2.3rem;
+
+    color:var(--subtitle);
+
+    margin-bottom:20px;
+
+}
+
+.ending-content h1{
+
+    font-size:clamp(2.8rem,9vw,4.8rem);
+
+    line-height:1.2;
+
+    margin-bottom:35px;
+
+}
+
+.ending-content p{
+
+    color:var(--subtitle);
+
+    font-size:1.1rem;
+
+}
+
+.ending-content h3{
+
+    margin-top:40px;
+
+    font-size:2rem;
+
+    color:var(--gold);
+
+}
+
+/* ===========================
+   Audio
+=========================== */
+
+audio{
+
+    width:100%;
+
+    margin-top:30px;
+
+}
+
+/* ===========================
+   Scroll elegante
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eee;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--gold);
+
+    border-radius:20px;
+
+}
+
+/* ===========================
+   Selección de texto
+=========================== */
+
+::selection{
+
+    background:rgba(184,155,119,.35);
+
+}
+
+/* ===========================
+   Animaciones
+=========================== */
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+.paper{
+
+    animation:slideUp .7s ease;
+
+}
+
+.photo-page{
+
+    animation:slideUp .7s ease;
+
+}
+
+/* ===========================
+   Efecto botones
+=========================== */
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+.nav:hover{
+
+    transform:scale(1.08);
+
+}
+
+#musicButton:hover{
+
+    transform:rotate(12deg);
+
+}
+
+/* ===========================
+   Imagen cargada
+=========================== */
+
+#photo.loaded{
+
+    opacity:1;
+
+}
+
+#photo{
+
+    opacity:0;
+
+}
+
+/* ===========================
+   Progreso
+=========================== */
+
+#progress{
+
+    margin-top:25px;
+
+    font-size:1rem;
+
+    color:var(--subtitle);
+
+}
+
+#currentPhoto{
+
+    font-size:1.2rem;
+
+    color:var(--gold);
+
+    font-weight:bold;
+
+}
+
+#totalPhotos{
+
+    font-weight:bold;
+
+}
+/* =====================================================
+   STYLE V4.1
+   PARTE 4/4
+===================================================== */
+
+/* ===========================
+   Responsive móvil
+=========================== */
+
+@media (max-width:768px){
+
+    body{
+
+        font-size:16px;
+
+    }
+
+    .screen{
+
+        padding:18px;
+
+    }
+
+    .cover-content h1{
+
+        font-size:3.2rem;
+
+    }
+
+    .cover-content h2{
+
+        font-size:1.5rem;
+
+    }
+
+    .paper{
+
+        padding:28px 22px;
+
+    }
+
+    .paper h2{
+
+        font-size:2.1rem;
+
+    }
+
+    #loveCounter{
+
+        gap:15px;
+
+    }
+
+    #loveCounter div{
+
+        width:85px;
+        height:85px;
+
+    }
+
+    #loveCounter span{
+
+        font-size:1.6rem;
+
+    }
+
+    #album{
+
+        flex-direction:column;
+
+    }
+
+    .photo-page{
+
+        width:100%;
+
+        padding:16px;
+
+    }
+
+    #photo{
+
+        max-height:60vh;
+
+    }
+
+    .nav{
+
+        position:fixed;
+
+        bottom:22px;
+
+        width:56px;
+
+        height:56px;
+
+        z-index:100;
+
+        backdrop-filter:blur(8px);
+
+    }
+
+    #prev{
+
+        left:18px;
+
+    }
+
+    #next{
+
+        right:18px;
+
+    }
+
+    #caption{
+
+        font-size:.95rem;
+
+        min-height:55px;
+
+    }
+
+    .letter p{
+
+        font-size:.98rem;
+
+        line-height:1.9;
+
+    }
+
+}
+
+/* ===========================
+   Tablets
+=========================== */
+
+@media (min-width:769px) and (max-width:1100px){
+
+    .photo-page{
+
+        width:85%;
+
+    }
+
+}
+
+/* ===========================
+   Escritorio
+=========================== */
+
+@media (min-width:1101px){
+
+    .photo-page{
+
+        width:900px;
+
+    }
+
+}
+
+/* ===========================
+   Animaciones suaves
+=========================== */
+
+button{
+
+    transition:
+    transform .25s ease,
+    background .25s ease,
+    box-shadow .25s ease;
+
+}
+
+button:hover{
+
+    background:#c5a886;
+
+}
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+/* ===========================
+   Aparición de pantallas
+=========================== */
+
+.screen.active{
+
+    animation:screenFade .6s ease;
+
+}
+
+@keyframes screenFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+/* ===========================
+   Imagen
+=========================== */
+
+#photo{
+
+    transition:
+    opacity .4s ease,
+    transform .4s ease;
+
+}
+
+#photo:hover{
+
+    transform:scale(1.01);
+
+}
+
+/* ===========================
+   Tarjetas
+=========================== */
+
+.paper,
+.photo-page{
+
+    transition:.35s ease;
+
+}
+
+.paper:hover,
+.photo-page:hover{
+
+    box-shadow:
+
+    0 20px 45px rgba(0,0,0,.12);
+
+}
+
+/* ===========================
+   Música
+=========================== */
+
+#musicButton{
+
+    background:rgba(184,155,119,.95);
+
+    color:white;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.15);
+
+}
+
+#musicButton:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* ===========================
+   Footer final
+=========================== */
+
+.ending-content{
+
+    padding:20px;
+
+}
+
+.ending-content h1{
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+.ending-content p{
+
+    margin-top:25px;
+
+}
+
+/* ===========================
+   Utilidades
+=========================== */
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.fade{
+
+    animation:fade .5s ease;
+
+}
+
+.center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.shadow{
+
+    box-shadow:var(--shadow);
+
+}
+
+.round{
+
+    border-radius:var(--radius);
+
+}
+
+/* =====================================================
+   FIN DEL STYLE.CSS V4.1
+===================================================== */
+
+/* ===========================
+   Barra de progreso
+=========================== */
+
+#progressContainer{
+
+    width:100%;
+
+    margin-top:25px;
+
+}
+
+#progressBar{
+
+    width:100%;
+
+    height:8px;
+
+    background:#e8dfd4;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+}
+
+#progressFill{
+
+    width:2%;
+
+    height:100%;
+
+    background:var(--gold);
+
+    transition:.45s ease;
+
+}
+
+#progressText{
+
+    margin-top:12px;
+
+    text-align:center;
+
+    color:var(--subtitle);
+
+    letter-spacing:2px;
+
+}
+/*==================================
+      SOBRE
+===================================*/
+
+#envelope{
+
+    width:300px;
+
+    height:210px;
+
+    background:#d9bfa4;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.5s;
+
+    box-shadow:0 20px 35px rgba(0,0,0,.18);
+
+}
+
+#envelope:hover{
+
+    transform:scale(1.05);
+
+}
+
+.envelope-front{
+
+    text-align:center;
+
+}
+
+.envelope-front h2{
+
+    font-size:60px;
+
+}
+
+.envelope-front p{
+
+    margin-top:15px;
+
+    font-size:18px;
+
+}
+
+#letterPaper{
+
+    display:none;
+
+    max-width:750px;
+
+    background:white;
+
+    padding:50px;
+
+    border-radius:18px;
+
+    box-shadow:0 25px 45px rgba(0,0,0,.15);
+
+    animation:subir .8s ease;
+
+}
+
+#letterPaper.show{
+
+    display:block;
+
+}
+
+#letterPaper h2{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+    font-size:45px;
+
+}
+
+#letterText{
+
+    font-size:18px;
+
+    line-height:2;
+
+    min-height:320px;
+
+}
+
+#letterPaper h3{
+
+    text-align:right;
+
+    margin-top:40px;
+
+    color:#b89b77;
+
+}
+
+@keyframes subir{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(60px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+.fullscreen{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100vw;
+
+    height:100vh;
+
+    object-fit:contain;
+
+    background:black;
+
+    z-index:9999;
+
+    padding:20px;
+
+    cursor:zoom-out;
+
+}
