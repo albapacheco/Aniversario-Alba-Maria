@@ -358,6 +358,20 @@ button:hover{
 
 }
 
+.photo-navigation{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:18px;
+
+}
+
 /* ===========================
    Imagen
 =========================== */
@@ -366,7 +380,7 @@ button:hover{
 
     width:100%;
 
-    max-height:70vh;
+    max-height:55vh;
 
     object-fit:contain;
 
@@ -431,6 +445,8 @@ button:hover{
     align-items:center;
 
     justify-content:center;
+
+    position:static;
 
 }
 
@@ -733,10 +749,7 @@ button:active{
     font-weight:bold;
 
 }
-/* =====================================================
-   STYLE V4.1
-   PARTE 4/4
-===================================================== */
+
 
 /* ===========================
    Responsive móvil
@@ -744,122 +757,58 @@ button:active{
 
 @media (max-width:768px){
 
-    body{
-
-        font-size:16px;
-
-    }
-
     .screen{
 
-        padding:18px;
-
-    }
-
-    .cover-content h1{
-
-        font-size:3.2rem;
-
-    }
-
-    .cover-content h2{
-
-        font-size:1.5rem;
-
-    }
-
-    .paper{
-
-        padding:28px 22px;
-
-    }
-
-    .paper h2{
-
-        font-size:2.1rem;
-
-    }
-
-    #loveCounter{
-
-        gap:15px;
-
-    }
-
-    #loveCounter div{
-
-        width:85px;
-        height:85px;
-
-    }
-
-    #loveCounter span{
-
-        font-size:1.6rem;
-
-    }
-
-    #album{
-
-        flex-direction:column;
+        padding:10px;
 
     }
 
     .photo-page{
 
         width:100%;
-
-        padding:16px;
+        padding:12px;
 
     }
 
     #photo{
 
-        max-height:60vh;
-
-    }
-
-    .nav{
-
-        position:fixed;
-
-        bottom:22px;
-
-        width:56px;
-
-        height:56px;
-
-        z-index:100;
-
-        backdrop-filter:blur(8px);
-
-    }
-
-    #prev{
-
-        left:18px;
-
-    }
-
-    #next{
-
-        right:18px;
+        width:100%;
+        max-height:52vh;
+        height:auto;
+        object-fit:contain;
 
     }
 
     #caption{
 
-        font-size:.95rem;
-
-        min-height:55px;
+        margin-top:15px;
+        font-size:15px;
+        line-height:1.6;
+        min-height:auto;
+        padding:0;
 
     }
 
-    .letter p{
+    .photo-navigation{
 
-        font-size:.98rem;
+        width:100%;
 
-        line-height:1.9;
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:center;
+
+        margin-top:15px;
+
+    }
+
+    .nav{
+
+        position:static;
+
+        width:48px;
+        height:48px;
 
     }
 
@@ -1180,6 +1129,7 @@ button:active{
     display:none;
 
     max-width:750px;
+    width:95%;
 
     background:white;
 
@@ -1190,6 +1140,9 @@ button:active{
     box-shadow:0 25px 45px rgba(0,0,0,.15);
 
     animation:subir .8s ease;
+
+    max-height:85vh;
+    overflow-y:auto;
 
 }
 
@@ -1296,3 +1249,49 @@ button:active{
 #letterPaper.show {
     display: block;
 }
+
+/* ===========================
+   MÓVIL
+=========================== */
+
+@media (max-width:768px){
+
+    #letterPaper{
+
+        width:95%;
+
+        padding:25px;
+
+        max-height:85vh;
+
+        overflow-y:auto;
+
+    }
+
+    #letterPaper h2{
+
+        font-size:30px;
+
+        margin-bottom:20px;
+
+    }
+
+    #letterText{
+
+        font-size:16px;
+
+        line-height:1.8;
+
+        min-height:auto;
+
+    }
+
+    #letterPaper h3{
+
+        font-size:22px;
+
+    }
+
+}
+
+

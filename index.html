@@ -23,24 +23,14 @@
 
 <body>
 
-    <!-- Fondo -->
-
     <div class="background"></div>
 
-    <!-- Botón Música -->
-
     <button id="musicButton">
-
         🔊
-
     </button>
 
-    <!-- Audio -->
-
     <audio id="player" loop preload="auto">
-
         <source src="audio/cancion.mp3" type="audio/mpeg">
-
     </audio>
 
     <!-- ========================= -->
@@ -52,27 +42,19 @@
         <div class="cover-content">
 
             <p class="date">
-
                 12 · 07 · 2025
-
             </p>
 
             <h1>
-
                 Alba & María
-
             </h1>
 
             <h2>
-
                 Nuestro Primer Año
-
             </h2>
 
             <button id="openBook">
-
                 Comenzar
-
             </button>
 
         </div>
@@ -87,38 +69,24 @@
 
         <div class="paper">
 
-            <h2>
-
-                Para María 🤍
-
-            </h2>
+            <h2>Para María 🤍</h2>
 
             <p>
-
                 Si estás leyendo esto...
-
                 significa que ya ha pasado un año desde que comenzó nuestra historia.
-
             </p>
 
             <p>
-
                 Este pequeño álbum guarda algunos de nuestros recuerdos favoritos.
-
             </p>
 
             <p>
-
                 Espero que, mientras pasas cada fotografía,
-
                 vuelvas a sentir todo lo que hemos vivido juntas.
-
             </p>
 
             <button id="startAlbum">
-
                 Empezar el álbum
-
             </button>
 
         </div>
@@ -133,44 +101,29 @@
 
         <div class="paper">
 
-            <h2>
-
-                Llevamos juntas...
-
-            </h2>
+            <h2>Llevamos juntas...</h2>
 
             <div id="loveCounter">
 
                 <div>
-
                     <span id="days">0</span>
-
                     <small>Días</small>
-
                 </div>
 
                 <div>
-
                     <span id="hours">0</span>
-
                     <small>Horas</small>
-
                 </div>
 
                 <div>
-
                     <span id="minutes">0</span>
-
                     <small>Minutos</small>
-
                 </div>
 
             </div>
 
             <button id="continueAlbum">
-
                 Ver nuestros recuerdos
-
             </button>
 
         </div>
@@ -183,45 +136,43 @@
 
     <section id="album" class="screen">
 
-        <button id="prev" class="nav">
-
-            ❮
-
-        </button>
-
         <div class="photo-page">
 
             <img id="photo" src="" alt="Nuestro recuerdo">
 
             <p id="caption"></p>
 
-        <div id="progressContainer">
+            <!-- Flechas debajo de la foto -->
 
-            <div id="progressBar">
+            <div class="photo-navigation">
 
-                <div id="progressFill"></div>
+                <button id="prev" class="nav">❮</button>
+
+                <button id="next" class="nav">❯</button>
 
             </div>
 
-            <div id="progressText">
+            <div id="progressContainer">
 
-                <span id="currentPhoto">1</span>
+                <div id="progressBar">
+
+                    <div id="progressFill"></div>
+
+                </div>
+
+                <div id="progressText">
+
+                    <span id="currentPhoto">1</span>
 
                     /
 
-                <span id="totalPhotos">50</span>
+                    <span id="totalPhotos">50</span>
 
-             </div>
+                </div>
+
+            </div>
 
         </div>
-
-        </div>
-
-        <button id="next" class="nav">
-
-            ❯
-
-        </button>
 
     </section>
 
@@ -236,6 +187,7 @@
             <div class="envelope-front">
 
                 <h2>💌</h2>
+
                 <p>Púlsame</p>
 
             </div>
@@ -248,7 +200,7 @@
 
             <div id="letterText">
 
-             <p></p>
+                <p></p>
 
             </div>
 
@@ -271,6 +223,7 @@
         </div>
 
     </section>
+
     <!-- ========================= -->
     <!-- FINAL -->
     <!-- ========================= -->
