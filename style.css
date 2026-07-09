@@ -330,8 +330,6 @@ button:hover{
 
 #album{
 
-    display:flex;
-
     align-items:center;
 
     justify-content:center;
@@ -1272,4 +1270,29 @@ button:active{
 
     cursor:zoom-out;
 
+}
+/* =========================
+   CARTA - CORRECCIÓN
+========================= */
+
+#letter.screen.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#envelope {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#letterPaper.hidden {
+    display: none;
+}
+
+#letterPaper.show {
+    display: block;
 }

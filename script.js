@@ -1,52 +1,106 @@
 // ======================================================
-// ALBA & MARÍA
-// SCRIPT V6.0
-// PARTE 1/4
+// CONFIGURACIÓN
 // ======================================================
 
-// ------------------------------
-// CONFIGURACIÓN
-// ------------------------------
-
 const TOTAL_FOTOS = 50;
+
 const FECHA_INICIO = new Date("2025-07-12T00:00:00");
 
+const VELOCIDAD_CARTA = 25;
+
+
+// ======================================================
+// VARIABLES
+// ======================================================
+
 let fotoActual = 1;
+
 let inicioX = 0;
 
-// ------------------------------
+let escribiendoCarta = false;
+
+let musicaIniciada = false;
+
+
+// ======================================================
 // ATAJO
-// ------------------------------
+// ======================================================
 
 const $ = (id) => document.getElementById(id);
 
-// ------------------------------
-// ELEMENTOS
-// ------------------------------
 
-const player = $("player");
-const musicButton = $("musicButton");
+// ======================================================
+// ELEMENTOS DEL DOM
+// ======================================================
 
-const photo = $("photo");
-const caption = $("caption");
-
-const next = $("next");
-const prev = $("prev");
-
-const currentPhoto = $("currentPhoto");
-const totalPhotos = $("totalPhotos");
-const progressFill = $("progressFill");
-
-const envelope = $("envelope");
-const letterPaper = $("letterPaper");
-const letterText = $("letterText");
-const finish = $("finish");
-
-// ------------------------------
-// PANTALLAS
-// ------------------------------
+// Pantallas
 
 const screens = document.querySelectorAll(".screen");
+
+
+// Música
+
+const player = $("player");
+
+const musicButton = $("musicButton");
+
+
+// Portada
+
+const openBook = $("openBook");
+
+
+// Dedicatoria
+
+const startAlbum = $("startAlbum");
+
+
+// Contador
+
+const continueAlbum = $("continueAlbum");
+
+
+// Álbum
+
+const album = $("album");
+
+const photo = $("photo");
+
+const caption = $("caption");
+
+const prev = $("prev");
+
+const next = $("next");
+
+
+// Barra
+
+const progressFill = $("progressFill");
+
+const currentPhoto = $("currentPhoto");
+
+const totalPhotos = $("totalPhotos");
+
+
+// Carta
+
+const envelope = $("envelope");
+
+const letterPaper = $("letterPaper");
+
+const letterText = document.querySelector("#letterText p");
+
+const finish = $("finish");
+
+
+// Final
+
+const ending = $("ending");
+
+
+// ======================================================
+// CAMBIAR PANTALLA
+// ======================================================
 
 function mostrarPantalla(id){
 
@@ -56,29 +110,42 @@ function mostrarPantalla(id){
 
     });
 
-    const destino=$(id);
+    const pantalla=$(id);
 
-    if(destino){
+    if(!pantalla){
 
-        destino.classList.add("active");
+        return;
+
+    }
+
+    pantalla.classList.add("active");
+
+    if(id==="letter"){
+
+        envelope.style.display="flex";
+
+        letterPaper.classList.remove("show");
+
+        letterPaper.classList.add("hidden");
+
+        const p=letterText.querySelector("p");
+
+        if(p){
+
+            p.textContent="";
+
+        }
 
     }
 
 }
 
-// ------------------------------
+
+// ======================================================
 // MÚSICA
-// ------------------------------
+// ======================================================
 
-function iniciarMusica(){
-
-    if(!player) return;
-
-    player.play().catch(()=>{});
-
-}
-
-function cambiarIconoMusica(){
+function actualizarIconoMusica(){
 
     if(player.paused){
 
@@ -92,29 +159,47 @@ function cambiarIconoMusica(){
 
 }
 
-if(musicButton){
+function iniciarMusica(){
 
-    musicButton.addEventListener("click",()=>{
+    if(musicaIniciada){
 
-        if(player.paused){
+        return;
 
-            player.play();
+    }
 
-        }else{
+    musicaIniciada=true;
 
-            player.pause();
+    player.volume=1;
 
-        }
+    player.play().catch(()=>{});
 
-        cambiarIconoMusica();
-
-    });
+    musicButton.textContent="🔊";
 
 }
 
-// ------------------------------
+
+function alternarMusica(){
+
+    if(player.paused){
+
+        player.play();
+
+    }else{
+
+        player.pause();
+
+    }
+
+    actualizarIconoMusica();
+
+}
+
+musicButton.addEventListener("click",alternarMusica);
+
+
+// ======================================================
 // CONTADOR
-// ------------------------------
+// ======================================================
 
 function actualizarContador(){
 
@@ -124,126 +209,107 @@ function actualizarContador(){
 
     const dias=Math.floor(diferencia/86400000);
 
-    const horas=Math.floor(
+    const horas=Math.floor((diferencia%86400000)/3600000);
 
-        (diferencia%86400000)/3600000
+    const minutos=Math.floor((diferencia%3600000)/60000);
 
-    );
+    $("days").textContent=dias;
 
-    const minutos=Math.floor(
+    $("hours").textContent=horas;
 
-        (diferencia%3600000)/60000
-
-    );
-
-    if($("days")) $("days").textContent=dias;
-
-    if($("hours")) $("hours").textContent=horas;
-
-    if($("minutes")) $("minutes").textContent=minutos;
+    $("minutes").textContent=minutos;
 
 }
 
 setInterval(actualizarContador,1000);
 
-// ------------------------------
-// RECUPERAR FOTO
-// ------------------------------
 
-const guardada=localStorage.getItem("ultimaFoto");
+// ======================================================
+// BOTONES INICIALES
+// ======================================================
 
-if(guardada){
+openBook.addEventListener("click",()=>{
 
-    fotoActual=parseInt(guardada);
+    iniciarMusica();
 
-    if(isNaN(fotoActual)){
+    mostrarPantalla("intro");
 
-        fotoActual=1;
+});
+
+
+startAlbum.addEventListener("click",()=>{
+
+    actualizarContador();
+
+    mostrarPantalla("counterScreen");
+
+});
+
+
+continueAlbum.addEventListener("click",()=>{
+
+    mostrarPantalla("album");
+
+    cargarFoto();
+
+});
+
+// ======================================================
+// PRECARGAR FOTOS
+// ======================================================
+
+function precargarAlbum(){
+
+    for(let i=1;i<=TOTAL_FOTOS;i++){
+
+        const img=new Image();
+
+        img.src=`fotos/${String(i).padStart(2,"0")}.jpg`;
 
     }
 
 }
 
-// ------------------------------
-// CAMBIAR FOTO
-// ------------------------------
 
-function actualizarBarra(){
-
-    currentPhoto.textContent=fotoActual;
-
-    totalPhotos.textContent=TOTAL_FOTOS;
-
-    progressFill.style.width=(
-
-        fotoActual/TOTAL_FOTOS*100
-
-    )+"%";
-
-}
+// ======================================================
+// CARGAR FOTO
+// ======================================================
 
 function cargarFoto(){
 
-    const numero=String(fotoActual).padStart(2,"0");
+    fotoActual = Math.max(1, Math.min(fotoActual, TOTAL_FOTOS));
+
+    const numero = String(fotoActual).padStart(2,"0");
 
     photo.classList.remove("loaded");
 
-    photo.src=`fotos/${numero}.jpg`;
+    photo.onload = () => photo.classList.add("loaded");
 
-    photo.onload=()=>{
+    photo.src = `fotos/${numero}.jpg`;
 
-        photo.classList.add("loaded");
+    caption.textContent =
+        (typeof frases !== "undefined" && frases[fotoActual-1])
+            ? frases[fotoActual-1]
+            : "";
 
-    };
+    currentPhoto.textContent = fotoActual;
+    totalPhotos.textContent = TOTAL_FOTOS;
 
-    if(typeof frases!=="undefined"){
+    progressFill.style.width =
+        `${(fotoActual / TOTAL_FOTOS) * 100}%`;
 
-        caption.textContent=frases[fotoActual-1]||"";
-
-    }
-
-    actualizarBarra();
-
-    localStorage.setItem(
-
-        "ultimaFoto",
-
-        fotoActual
-
-    );
-
-    precargar();
+    
 
 }
 
-function precargar(){
-
-    if(fotoActual>=TOTAL_FOTOS){
-
-        return;
-
-    }
-
-    const img=new Image();
-
-    img.src=`fotos/${String(fotoActual+1).padStart(2,"0")}.jpg`;
-
-}
 
 // ======================================================
-// CONTINÚA EN LA PARTE 2
+// FOTO SIGUIENTE
 // ======================================================
-// ======================================================
-// SCRIPT V6.0
-// PARTE 2/4
-// NAVEGACIÓN DEL ÁLBUM
-// ======================================================
-
-// ------------------------------
-// SIGUIENTE FOTO
-// ------------------------------
 
 function siguienteFoto(){
+
+    photo.classList.remove("zoom");
 
     if(fotoActual < TOTAL_FOTOS){
 
@@ -251,53 +317,57 @@ function siguienteFoto(){
 
         cargarFoto();
 
-    }else{
-
-        mostrarPantalla("letter");
+        return;
 
     }
 
+    mostrarPantalla("letter");
+
 }
 
-// ------------------------------
+
+// ======================================================
 // FOTO ANTERIOR
-// ------------------------------
+// ======================================================
 
 function anteriorFoto(){
 
-    if(fotoActual > 1){
+    photo.classList.remove("zoom");
 
-        fotoActual--;
+    if(fotoActual === 1){
 
-        cargarFoto();
+        return;
 
     }
 
+    fotoActual--;
+
+    cargarFoto();
+
 }
 
-// ------------------------------
+// ======================================================
 // BOTONES
-// ------------------------------
+// ======================================================
 
 if(next){
 
-    next.addEventListener("click", siguienteFoto);
+    next.addEventListener("click",siguienteFoto);
 
 }
 
 if(prev){
 
-    prev.addEventListener("click", anteriorFoto);
+    prev.addEventListener("click",anteriorFoto);
 
 }
 
-// ------------------------------
+
+// ======================================================
 // TECLADO
-// ------------------------------
+// ======================================================
 
 document.addEventListener("keydown",(e)=>{
-
-    const album = $("album");
 
     if(!album.classList.contains("active")) return;
 
@@ -315,33 +385,31 @@ document.addEventListener("keydown",(e)=>{
 
 });
 
-// ------------------------------
+
+// ======================================================
 // GESTOS TÁCTILES
-// ------------------------------
+// ======================================================
 
-document.addEventListener("touchstart",(e)=>{
+album.addEventListener("touchstart",(e)=>{
 
-    if(!$("album").classList.contains("active")) return;
+    inicioX=e.touches[0].clientX;
 
-    inicioX = e.changedTouches[0].clientX;
+});
 
-},{passive:true});
 
-document.addEventListener("touchend",(e)=>{
+album.addEventListener("touchend",(e)=>{
 
-    if(!$("album").classList.contains("active")) return;
+    const finX=e.changedTouches[0].clientX;
 
-    const finX = e.changedTouches[0].clientX;
+    const diferencia=inicioX-finX;
 
-    const diferencia = finX - inicioX;
-
-    if(Math.abs(diferencia) < 60){
+    if(Math.abs(diferencia)<60){
 
         return;
 
     }
 
-    if(diferencia < 0){
+    if(diferencia>0){
 
         siguienteFoto();
 
@@ -351,102 +419,109 @@ document.addEventListener("touchend",(e)=>{
 
     }
 
-},{passive:true});
+});
 
-// ------------------------------
-// BOTONES PRINCIPALES
-// ------------------------------
 
-$("openBook").addEventListener("click",()=>{
+// ======================================================
+// ZOOM FOTO
+// ======================================================
 
-    iniciarMusica();
+photo.addEventListener("click",()=>{
 
-    mostrarPantalla("intro");
+    photo.classList.toggle("zoom");
 
 });
 
-$("startAlbum").addEventListener("click",()=>{
+document.addEventListener("keydown",(e)=>{
 
-    actualizarContador();
+    if(e.key==="Escape"){
 
-    mostrarPantalla("counterScreen");
+        photo.classList.remove("zoom");
 
-});
-
-$("continueAlbum").addEventListener("click",()=>{
-
-    mostrarPantalla("album");
-
-    cargarFoto();
+    }
 
 });
 
-// ------------------------------
-// PRECARGAR TODO EL ÁLBUM
-// ------------------------------
+// ======================================================
+// TEXTO DE LA CARTA
+// ======================================================
 
-function precargarAlbum(){
+const CARTA =`Querida María,
 
-    for(let i=1;i<=TOTAL_FOTOS;i++){
+Hace exactamente un año comenzó la mejor aventura de mi vida.
 
-        const img=new Image();
+Desde aquel 12 de julio mi mundo cambió por completo.
 
-        img.src=`fotos/${String(i).padStart(2,"0")}.jpg`;
+Gracias por cada abrazo, cada beso, cada risa y por estar a mi lado incluso en los días difíciles.
+
+Este pequeño álbum no pretende resumir todo lo que hemos vivido, porque sería imposible, pero sí guardar algunos de los momentos que más felices me hacen cuando los recuerdo.
+
+Ojalá dentro de muchos años podamos volver a abrir esta página y seguir sonriendo al recordar este primer aniversario.
+
+Gracias por elegirme cada día.
+
+Te quiero muchísimo.
+
+Feliz primer aniversario.
+
+Con todo mi amor,
+
+Alba ❤️`;
+
+
+// ======================================================
+// EFECTO MÁQUINA DE ESCRIBIR
+// ======================================================
+
+async function escribirCarta(){
+
+    if(escribiendoCarta){
+
+        return;
+
+    }
+
+    escribiendoCarta = true;
+
+    const texto = CARTA;
+
+    letterText.innerHTML = "";
+
+    for(let i=0;i<texto.length;i++){
+
+        letterText.innerHTML += texto[i];
+
+        let velocidad = VELOCIDAD_CARTA;
+
+        switch(texto[i]){
+
+            case ",":
+                velocidad = 120;
+                break;
+
+            case ".":
+            case "!":
+            case "?":
+                velocidad = 220;
+                break;
+
+            case "\n":
+                velocidad = 280;
+                break;
+
+        }
+
+        await new Promise(resolve=>setTimeout(resolve,velocidad));
 
     }
 
 }
 
 // ======================================================
-// CONTINÚA EN LA PARTE 3
-// ======================================================
-// ======================================================
-// SCRIPT V6.0
-// PARTE 3/4
-// CARTA Y FINAL
-// ======================================================
-
-// ------------------------------
-// TEXTO DE LA CARTA
-// ------------------------------
-
-const carta = `Querida María,
-
-Si has llegado hasta aquí es porque acabas de volver a recorrer algunos de nuestros recuerdos favoritos.
-
-Ha pasado un año desde que empezó esta historia y todavía me emociono al pensar en todo lo que hemos vivido.
-
-Gracias por hacerme tan feliz.
-
-Gracias por cada sonrisa.
-
-Gracias por cada abrazo.
-
-Gracias por cada viaje.
-
-Gracias por estar siempre a mi lado.
-
-Cada una de estas fotografías representa un momento que guardaré para siempre en mi corazón.
-
-Pero sé que las mejores fotografías todavía no las hemos hecho.
-
-Porque lo mejor de nuestra historia aún está por llegar.
-
-Feliz primer aniversario.
-
-Te quiero muchísimo.
-
-Con todo mi amor,
-
-Alba ❤️`;
-
-// ------------------------------
 // ABRIR SOBRE
-// ------------------------------
+// ======================================================
 
 function abrirCarta(){
-
-    if(!envelope || !letterPaper) return;
 
     envelope.style.display="none";
 
@@ -458,47 +533,19 @@ function abrirCarta(){
 
 }
 
+// ======================================================
+// EVENTO SOBRE
+// ======================================================
+
 if(envelope){
 
     envelope.addEventListener("click",abrirCarta);
 
 }
 
-// ------------------------------
-// EFECTO ESCRITURA
-// ------------------------------
-
-function escribirCarta(){
-
-    const parrafo = document.querySelector("#letterText p");
-
-    if(!parrafo) return;
-
-    parrafo.textContent="";
-
-    let i=0;
-
-    function escribir(){
-
-        if(i<carta.length){
-
-            parrafo.textContent += carta.charAt(i);
-
-            i++;
-
-            setTimeout(escribir,25);
-
-        }
-
-    }
-
-    escribir();
-
-}
-
-// ------------------------------
+// ======================================================
 // BOTÓN FINAL
-// ------------------------------
+// ======================================================
 
 if(finish){
 
@@ -510,197 +557,95 @@ if(finish){
 
 }
 
-// ------------------------------
-// REINICIAR CARTA
-// ------------------------------
-
-function reiniciarCarta(){
-
-    const parrafo=document.querySelector("#letterText p");
-
-    if(parrafo){
-
-        parrafo.textContent="";
-
-    }
-
-    if(letterPaper){
-
-        letterPaper.classList.remove("show");
-
-        letterPaper.classList.add("hidden");
-
-    }
-
-    if(envelope){
-
-        envelope.style.display="flex";
-
-    }
-
-}
-
-// ------------------------------
-// BAJAR VOLUMEN EN LA CARTA
-// ------------------------------
-
-function bajarMusica(){
-
-    if(player){
-
-        player.volume=0.35;
-
-    }
-
-}
-
-function subirMusica(){
-
-    if(player){
-
-        player.volume=1;
-
-    }
-
-}
-
-if(envelope){
-
-    envelope.addEventListener("click",bajarMusica);
-
-}
-
-if(finish){
-
-    finish.addEventListener("click",subirMusica);
-
-}
-
 // ======================================================
-// CONTINÚA EN LA PARTE 4
-// ======================================================
-// ======================================================
-// SCRIPT V6.0
-// PARTE 4/4
-// INICIALIZACIÓN Y EFECTOS
+// RECUPERAR ÚLTIMA FOTO
 // ======================================================
 
-// ------------------------------
-// EFECTO FADE EN LAS FOTOS
-// ------------------------------
 
-if(photo){
 
-    photo.addEventListener("load",()=>{
 
-        photo.classList.add("loaded");
-
-    });
-
-}
-
-// ------------------------------
-// AMPLIAR FOTO
-// ------------------------------
-
-let fotoAmpliada=false;
-
-if(photo){
-
-    photo.addEventListener("click",()=>{
-
-        if(!fotoAmpliada){
-
-            photo.classList.add("fullscreen");
-
-            document.body.style.overflow="hidden";
-
-            fotoAmpliada=true;
-
-        }
-
-        else{
-
-            photo.classList.remove("fullscreen");
-
-            document.body.style.overflow="auto";
-
-            fotoAmpliada=false;
-
-        }
-
-    });
-
-}
-
-// ------------------------------
-// PRECARGAR TODO EL ÁLBUM
-// ------------------------------
-
-function precargarAlbum(){
-
-    for(let i=1;i<=TOTAL_FOTOS;i++){
-
-        const img=new Image();
-
-        img.src=`fotos/${String(i).padStart(2,"0")}.jpg`;
-
-    }
-
-}
-
-// ------------------------------
-// INICIALIZACIÓN
-// ------------------------------
-
-window.addEventListener("load",()=>{
-
-    actualizarContador();
-
-    cambiarIconoMusica();
-
-    actualizarBarra();
-
-    precargarAlbum();
-
-});
-
-// ------------------------------
-// VISIBILIDAD DE LA PÁGINA
-// ------------------------------
+// ======================================================
+// REANUDAR MÚSICA
+// ======================================================
 
 document.addEventListener("visibilitychange",()=>{
 
     if(document.hidden){
 
-        if(player && !player.paused){
+        return;
 
-            player.pause();
+    }
 
-        }
+    if(musicaIniciada && player.paused){
 
-    }else{
-
-        if(player){
-
-            player.play().catch(()=>{});
-
-        }
+        player.play().catch(()=>{});
 
     }
 
 });
 
-// ------------------------------
-// RECALCULAR BARRA
-// ------------------------------
 
-window.addEventListener("resize",()=>{
+// ======================================================
+// CERRAR ZOOM AL CAMBIAR DE FOTO
+// ======================================================
 
-    actualizarBarra();
+function cerrarZoom(){
+
+    photo.classList.remove("zoom");
+
+}
+
+
+// Sobrescribimos ligeramente la navegación
+
+const siguienteOriginal = siguienteFoto;
+
+siguienteFoto = function(){
+
+    cerrarZoom();
+
+    siguienteOriginal();
+
+}
+
+const anteriorOriginal = anteriorFoto;
+
+anteriorFoto = function(){
+
+    cerrarZoom();
+
+    anteriorOriginal();
+
+}
+
+
+// ======================================================
+// PRECARGAR RECURSOS
+// ======================================================
+
+window.addEventListener("load",()=>{
+
+    precargarAlbum();
 
 });
 
+
 // ======================================================
-// FIN DEL SCRIPT V6
+// INICIALIZACIÓN
 // ======================================================
+
+function init(){
+
+    actualizarContador();
+
+    actualizarIconoMusica();
+
+    fotoActual = 1;
+    
+    cargarFoto();
+
+    totalPhotos.textContent = TOTAL_FOTOS;
+
+}
+
+init();
