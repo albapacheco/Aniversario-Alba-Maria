@@ -6,8 +6,6 @@ const TOTAL_FOTOS = 50;
 
 const FECHA_INICIO = new Date("2025-07-12T00:00:00");
 
-const VELOCIDAD_CARTA = 25;
-
 
 // ======================================================
 // VARIABLES
@@ -446,74 +444,26 @@ document.addEventListener("keydown",(e)=>{
 // TEXTO DE LA CARTA
 // ======================================================
 
-const CARTA =`Querida María,
-
-Hace exactamente un año comenzó la mejor aventura de mi vida.
-
+const CARTA = `Hace exactamente un año comenzó la mejor aventura de mi vida.
 Desde aquel 12 de julio mi mundo cambió por completo.
-
 Gracias por cada abrazo, cada beso, cada risa y por estar a mi lado incluso en los días difíciles.
-
 Este pequeño álbum no pretende resumir todo lo que hemos vivido, porque sería imposible, pero sí guardar algunos de los momentos que más felices me hacen cuando los recuerdo.
-
+Cada fotografía es un pequeño pedacito de nosotras, un instante que demuestra todo lo que hemos construido juntas en este primer año.
 Ojalá dentro de muchos años podamos volver a abrir esta página y seguir sonriendo al recordar este primer aniversario.
-
+Porque mi deseo es que este solo sea el primero de muchísimos más.
 Gracias por elegirme cada día.
-
+Gracias por hacerme tan feliz.
 Te quiero muchísimo.
 
-Feliz primer aniversario.
-
-Con todo mi amor,
-
-Alba ❤️`;
-
+Feliz primer aniversario.`;
 
 // ======================================================
 // EFECTO MÁQUINA DE ESCRIBIR
 // ======================================================
 
-async function escribirCarta(){
+function escribirCarta(){
 
-    if(escribiendoCarta){
-
-        return;
-
-    }
-
-    escribiendoCarta = true;
-
-    const texto = CARTA;
-
-    letterText.innerHTML = "";
-
-    for(let i=0;i<texto.length;i++){
-
-        letterText.innerHTML += texto[i];
-
-        let velocidad = VELOCIDAD_CARTA;
-
-        switch(texto[i]){
-
-            case ",":
-                velocidad = 120;
-                break;
-
-            case ".":
-            case "!":
-            case "?":
-                velocidad = 220;
-                break;
-
-            case "\n":
-                velocidad = 280;
-                break;
-
-        }
-
-        await new Promise(resolve=>setTimeout(resolve,velocidad));
-
-    }
+    letterText.innerHTML = CARTA.replace(/\n/g,"<br>");
 
 }
 
@@ -523,7 +473,7 @@ async function escribirCarta(){
 
 function abrirCarta(){
 
-    envelope.style.display="none";
+    envelope.style.display = "none";
 
     letterPaper.classList.remove("hidden");
 
